@@ -291,6 +291,8 @@ public class DES {
 			}
 			blocks[q][r++] = binary.charAt(p);
 		}
+		while(r<64)
+			blocks[q][r++] = '0';
 
 		StringBuilder outputBits = new StringBuilder();
 		
