@@ -236,15 +236,28 @@ public class DES {
 	}
 
 	private static String toBinary(String text) {
-	    byte[] bytes = text.getBytes();
+        byte[] bytes = text.getBytes();
+        StringBuilder binary = new StringBuilder();
+        for (byte b : bytes) {
+            int val = b;
+            for (int i = 0; i < 8; i++) {
+                binary.append((val & 128) == 0 ? 0 : 1);
+                val <<= 1;
+            }
+        }
+        return binary.toString();
+    }
+
+	private static String hexToBinary(String hex) {
 	    StringBuilder binary = new StringBuilder();
-	    for (byte b : bytes) {
-	        int val = b;
-	        for (int i = 0; i < 8; i++) {
+	    for (int i = 0; i < hex.length(); i=i+2) {
+	        int val = Integer.parseInt(hex.substring(i,i+2), 16);
+	        for (int j = 0; j < 8; j++) {
 	            binary.append((val & 128) == 0 ? 0 : 1);
 	            val <<= 1;
 	        }
 	    }
+	    
 	    return binary.toString();
 	}
 
@@ -257,11 +270,17 @@ public class DES {
 	}
 
 	// 'type' can be either 'ENCRYPT' or 'DECRYPT'
+	// inputText is a hex String for DECRYPT and ASCII String for ENCRYPT
 	private static String crypt(String inputText, String key, String type) {
 
 		// create 64 bit blocks
 		// convert every character in String inputText to bits and each bit is to be stored as a char in 'blocks[][]'
-		String binary = toBinary(inputText);
+		String binary;
+		if(type == ENCRYPT) 
+			binary = toBinary(inputText);
+		else
+			binary = hexToBinary(inputText);
+
 		int blocksNo = (binary.length()%BLOCK_SIZE)==0 ? (binary.length()/BLOCK_SIZE):(binary.length()/BLOCK_SIZE+1);
 		char[][] blocks = new char[blocksNo][64]; 
 		int q = 0, r = 0;
@@ -342,14 +361,14 @@ public class DES {
 		}
 
 		StringBuilder outputText = new StringBuilder();
-		for(int i=0; i<outputBits.length(); i=i+8)
-			outputText.append((char)(Integer.parseInt(outputBits.substring(i, i+8), 2)));
+		for(int i=0; i<outputBits.length(); i=i+8) {
+			int val = Integer.parseInt(outputBits.substring(i, i+8));
 
-		String foo = outputText.toString();
-		System.out.print("Decimal: ");
-		for(int i=0; i<foo.length(); i++)
-			System.out.print((int)foo.charAt(i)+" ");
-		System.out.println();
+			if(type==ENCRYPT) 
+				outputText.append(Integer.toHexString(Integer.parseInt(outputBits.substring(i, i+8), 2)));
+			else 
+				outputText.append((char)Integer.parseInt(outputBits.substring(i, i+8), 2));
+		}
 
 		return outputText.toString();
 	}

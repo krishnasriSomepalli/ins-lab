@@ -1,18 +1,15 @@
 class Test {
    public static void main(String[] args) {
-        // System.out.println(CaesarCipher.encode("AbCdE", 'a'));
-        // System.out.println(CaesarCipher.decode("AbCdE", 'a'));
+        System.out.println(CaesarCipher.encode("AbCdE", 'b'));
+        System.out.println(CaesarCipher.decode(CaesarCipher.encode("AbCdE", 'b'), 'b'));
 
-        // System.out.println(SubstitutionCipher.encode("AbCdE", "KdFGnsLvbWahexjmQCPzrtYiUo"));
-        // System.out.println(SubstitutionCipher.decode("KdFgN", "KdFGnsLvbWahexjmQCPzrtYiUo"));
+        System.out.println(SubstitutionCipher.encode("AbCdE", "KdFGnsLvbWahexjmQCPzrtYiUo"));
+        System.out.println(SubstitutionCipher.decode(SubstitutionCipher.encode("AbCdE", "KdFGnsLvbWahexjmQCPzrtYiUo"), "KdFGnsLvbWahexjmQCPzrtYiUo"));
 
-        // System.out.println(HillCipher.encode("MISSISSIPPI", 2, "DZYR"));
-        // System.out.println(HillCipher.decode("CIKKGEUWERZT", 2, "DZYR"));
+        System.out.println(HillCipher.encode("MISSISSIPPI", 2, "DZYR"));
+        System.out.println(HillCipher.decode(HillCipher.encode("MISSISSIPPI", 2, "DZYR"), 2, "DZYR"));
 
-   		String key = "abcdefgh";
-   		String plainText = "MySecret";
-   		String encoded = DES.encrypt(plainText, key);
-   		System.out.println(encoded);
-   		System.out.println(DES.decrypt(encoded, key));
+   		System.out.println(DES.encrypt("MySecret", "abcdefgh"));
+   		System.out.println(DES.decrypt(DES.encrypt("MySecret", "abcdefgh"), "abcdefgh"));
    }
 }
