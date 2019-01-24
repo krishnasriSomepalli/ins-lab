@@ -1,6 +1,6 @@
 public class CaesarCipher {
 	
-	public static String encode(String plainText, char charKey) {
+	public static String encrypt(String plainText, char charKey) {
         
         StringBuilder cipherText = new StringBuilder();
         int intKey;
@@ -27,7 +27,7 @@ public class CaesarCipher {
         return cipherText.toString();
     }
 
-    public static String decode(String cipherText, char charKey) {
+    public static String decrypt(String cipherText, char charKey) {
         
         StringBuilder plainText = new StringBuilder();
         int intKey;

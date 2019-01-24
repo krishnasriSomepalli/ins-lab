@@ -1,15 +1,13 @@
 class Test {
    public static void main(String[] args) {
-        System.out.println(CaesarCipher.encode("AbCdE", 'b'));
-        System.out.println(CaesarCipher.decode(CaesarCipher.encode("AbCdE", 'b'), 'b'));
+        System.out.println(CaesarCipher.decrypt(CaesarCipher.encrypt("AbCdE", 'b'), 'b'));
 
-        System.out.println(SubstitutionCipher.encode("AbCdE", "KdFGnsLvbWahexjmQCPzrtYiUo"));
-        System.out.println(SubstitutionCipher.decode(SubstitutionCipher.encode("AbCdE", "KdFGnsLvbWahexjmQCPzrtYiUo"), "KdFGnsLvbWahexjmQCPzrtYiUo"));
+        System.out.println(SubstitutionCipher.decrypt(SubstitutionCipher.encrypt("AbCdE", "KdFGnsLvbWahexjmQCPzrtYiUo"), "KdFGnsLvbWahexjmQCPzrtYiUo"));
 
-        System.out.println(HillCipher.encode("MISSISSIPPI", 2, "DZYR"));
-        System.out.println(HillCipher.decode(HillCipher.encode("MISSISSIPPI", 2, "DZYR"), 2, "DZYR"));
+        System.out.println(HillCipher.decrypt(HillCipher.encrypt("MISSISSIPPI", 2, "DZYR"), 2, "DZYR"));
 
-   		System.out.println(DES.encrypt("MySecrets", "abcdefgh"));
-   		System.out.println(DES.decrypt(DES.encrypt("MySecrets", "abcdefgh"), "abcdefgh"));
+   		System.out.println(Conversions.hexToAscii(DES.decrypt(DES.encrypt("4c6f72656d497073756d", "abcdefgh"), "abcdefgh")));
+
+   		System.out.println(Conversions.hexToAscii(TripleDES.decrypt(TripleDES.encrypt("4c6f72656d497073756d", "abcdefgh", "ijklmnop"), "abcdefgh", "ijklmnop")));
    }
 }

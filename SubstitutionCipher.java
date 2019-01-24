@@ -1,6 +1,6 @@
 public class SubstitutionCipher {
 	
-	public static String encode(String plainText, String substitutionText) {
+	public static String encrypt(String plainText, String substitutionText) {
 
         StringBuilder cipherText = new StringBuilder();
         substitutionText = substitutionText.toLowerCase();
@@ -21,7 +21,7 @@ public class SubstitutionCipher {
         return cipherText.toString();
    }
 
-   public static String decode(String cipherText, String substitutionText) {
+   public static String decrypt(String cipherText, String substitutionText) {
 
         StringBuilder plainText = new StringBuilder();
         substitutionText = substitutionText.toLowerCase();

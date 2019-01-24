@@ -1,7 +1,7 @@
 public class HillCipher {
 
 	// if your block is of size n, then your key should be of size n^2
-   public static String encode(String plainText, int blockSize, String key) {
+   public static String encrypt(String plainText, int blockSize, String key) {
         if(key.length() != blockSize*blockSize) {
             return null;
         }
@@ -55,7 +55,7 @@ public class HillCipher {
         }
    }
 
-   public static String decode(String cipherText, int blockSize, String key) {
+   public static String decrypt(String cipherText, int blockSize, String key) {
         if(key.length() != blockSize*blockSize) {
             return null;
         }
@@ -72,11 +72,11 @@ public class HillCipher {
             }
             Matrix keyMatrix = new Matrix(blockSize, blockSize, keyData);
             int det = Matrix.determinant(keyMatrix.data, keyMatrix.rowsNo);
-            int detModInv = ModularArithmetic.modInverse(det, 26);
+            int detModInv = Arithmetic.modInverse(det, 26);
             keyMatrix = keyMatrix.cofactorsMatrix().transpose();
             for(int i=0; i<blockSize; i++) 
                 for(int j=0; j<blockSize; j++) 
-                    keyMatrix.data[i][j] = ModularArithmetic.mod(keyMatrix.data[i][j]*detModInv,26);
+                    keyMatrix.data[i][j] = Arithmetic.mod(keyMatrix.data[i][j]*detModInv,26);
 
             // deciphering
             int blocksNo = cipherText.length()/blockSize;
