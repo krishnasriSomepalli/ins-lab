@@ -9,5 +9,10 @@ class Test {
    		System.out.println(Conversions.hexToAscii(DES.decrypt(DES.encrypt("4c6f72656d497073756d", "abcdefgh"), "abcdefgh")));
 
    		System.out.println(Conversions.hexToAscii(TripleDES.decrypt(TripleDES.encrypt("4c6f72656d497073756d", "abcdefgh", "ijklmnop"), "abcdefgh", "ijklmnop")));
+   		
+   		int p=61, q=53, e=17;
+   		int[] keys = RSA.generateKeys(p, q, e);
+   		int d = keys[0], n = keys[1];
+   		System.out.println(RSA.decrypt(RSA.encrypt("LoremIpsum", e, n), d, n));
    }
 }
