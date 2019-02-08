@@ -3,7 +3,7 @@ class RSA {
 	public static int[] generateKeys(int p, int q, int e) {
 		int n = p*q;
 		int phi = (p-1)*(q-1);
-		int[] result = new int[2];
+		int[] result = new int[3];
 
 		// check if p and q are primes
 		if(!Arithmetic.isPrime(p) || !Arithmetic.isPrime(q))
@@ -19,7 +19,8 @@ class RSA {
 		int d = (1+(k*phi))/e;
 
 		result[0] = d;
-		result[1] = n;
+		result[1] = e;
+		result[2] = n;
 		return result;
 	}
 
