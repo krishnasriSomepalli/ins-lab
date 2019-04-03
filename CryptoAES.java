@@ -7,22 +7,22 @@ import javax.crypto.BadPaddingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.InvalidKeyException;
 
-class CryptoDES {
+class CryptoAES {
 	public static void main(String args[]) {
 
 		// check args
 		if(args.length != 1) {
-			System.out.println("Command: java [PlainText]");
+			System.out.println("Command: java CryptoAES [PlainText]");
 			return;
 		}
 
 		try {
 			// create a DES key
-			KeyGenerator keyGen = KeyGenerator.getInstance("DES");
+			KeyGenerator keyGen = KeyGenerator.getInstance("AES");
 			SecretKey key = keyGen.generateKey(); 
 
 			// create a Cipher instance by specifying the algorithm name, mode (optional), and padding scheme (optional).
-			Cipher des = Cipher.getInstance("DES/ECB/PKCS5Padding");
+			Cipher des = Cipher.getInstance("AES/ECB/PKCS5Padding");
 
 			// convert plainText to byte[] format
 			String plainText = args[0];
